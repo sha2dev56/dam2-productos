@@ -1,0 +1,30 @@
+.welcome-container {
+  max-width: 700px;
+  margin: 60px auto;
+}
+
+.welcome-card {
+  text-align: center;
+  padding: 40px 25px;
+  border-radius: 16px;
+  background: var(--ion-card-background, #ffffff);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.welcome-card h1 {
+  font-size: 30px;
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+.welcome-card p {
+  font-size: 17px;
+  line-height: 1.6;
+  margin-bottom: 30px;
+  color: var(--ion-color-medium);
+}
+
+.welcome-card ion-button {
+  max-width: 300px;
+  margin: 0 auto;
+}

@@ -33,5 +33,58 @@
  */
 
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
-/* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import '@ionic/angular/css/palettes/dark.system.css';
+@import "@ionic/angular/css/palettes/dark.class.css";
+/* @import '@ionic/angular/css/palettes/dark.system.css'; */
+
+/* MODO OSCURO */
+body.dark {
+  --ion-background-color: #121212;
+  --ion-background-color-rgb: 18, 18, 18;
+
+  --ion-text-color: #ffffff;
+  --ion-text-color-rgb: 255, 255, 255;
+
+  --ion-card-background: #1e1e1e;
+}
+
+/* Fondo de la página */
+body.dark ion-content {
+  --background: #121212;
+  --color: #ffffff;
+}
+
+/* Barra superior */
+body.dark ion-toolbar {
+  --background: #1e1e1e;
+  --color: #ffffff;
+}
+
+/* Tarjetas */
+body.dark ion-card {
+  --background: #1e1e1e;
+  --color: #ffffff;
+}
+
+/* Títulos y textos */
+body.dark ion-card-title {
+  color: #ffffff;
+}
+/* Tabla en modo oscuro */
+body.dark table {
+  background: #1e1e1e;
+  color: #ffffff;
+}
+
+body.dark th {
+  background: var(--ion-color-primary);
+  color: #ffffff;
+}
+
+body.dark td {
+  color: #ffffff;
+  border-color: #444;
+}
+
+body.dark tbody tr:hover {
+  background: #2a2a2a;
+}

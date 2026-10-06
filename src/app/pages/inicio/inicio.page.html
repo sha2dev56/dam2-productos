@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Inicio</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="toggleDarkMode()">
+        <ion-icon
+          slot="icon-only"
+          [icon]="darkMode ? sunnyOutline : moonOutline">
+        </ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <div class="welcome-container">
+
+    <div class="welcome-card">
+
+      <h1>API REST</h1>
+
+      <p>
+        Aplicación desarrollada con Ionic y Angular Standalone
+        para consumir una API REST.
+      </p>
+
+      <ion-button
+        routerLink="/productos"
+        expand="block">
+        Ver productos
+      </ion-button>
+
+    </div>
+
+  </div>
+
+</ion-content>

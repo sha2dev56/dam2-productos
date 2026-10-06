@@ -1,0 +1,81 @@
+.loading-container {
+  text-align: center;
+  padding: 40px;
+}
+
+.products-header {
+  margin-bottom: 20px;
+}
+
+.products-header p {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 12px;
+}
+
+table {
+  width: 100%;
+  min-width: 900px;
+  border-collapse: collapse;
+  background: var(--ion-card-background, #ffffff);
+}
+
+th,
+td {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}
+
+th {
+  background: var(--ion-color-primary);
+  color: white;
+  font-weight: 600;
+}
+
+.product-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 250px;
+}
+
+.product-cell img {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.price {
+  font-weight: 600;
+}
+
+/* Efecto al pasar el ratón */
+tbody tr:hover {
+  background: #f5f5f5;
+}
+
+/* MODO OSCURO */
+:host-context(body.dark) table {
+  background: #1e1e1e;
+}
+
+:host-context(body.dark) td {
+  color: #ffffff;
+  border-color: #444;
+}
+
+:host-context(body.dark) tbody tr:hover {
+  background: #2a2a2a;
+}
+
+:host-context(body.dark) .products-header p {
+  color: #ffffff;
+}

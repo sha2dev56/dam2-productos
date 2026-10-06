@@ -1,34 +1,35 @@
 import { Component } from '@angular/core';
 
 import {
-  IonHeader,
-  IonToolbar,
-  IonTitle,
   IonContent,
-  IonButtons,
+  IonHeader,
+  IonTitle,
+  IonToolbar,
   IonButton,
+  IonButtons,
   IonIcon
 } from '@ionic/angular';
 
 import { RouterLink } from '@angular/router';
+
 import { moonOutline, sunnyOutline } from 'ionicons/icons';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+  selector: 'app-inicio',
+  templateUrl: './inicio.page.html',
+  styleUrls: ['./inicio.page.scss'],
   imports: [
     IonHeader,
     IonToolbar,
     IonTitle,
     IonContent,
-    IonButtons,
     IonButton,
+    IonButtons,
     IonIcon,
     RouterLink
-  ],
+  ]
 })
-export class HomePage {
+export class InicioPage {
 
   darkMode = false;
 

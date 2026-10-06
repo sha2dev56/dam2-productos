@@ -1,0 +1,119 @@
+<ion-header>
+  <ion-toolbar>
+
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/inicio"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>Productos</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="toggleDarkMode()">
+        <ion-icon
+          slot="icon-only"
+          [icon]="darkMode ? sunnyOutline : moonOutline">
+        </ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  @if (loading) {
+
+    <div class="loading-container">
+      <ion-spinner></ion-spinner>
+      <p>Cargando productos...</p>
+    </div>
+
+  }
+
+  @if (error) {
+
+    <ion-card class="error-card">
+      <ion-card-header>
+        <ion-card-title>Error</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <p>{{ error }}</p>
+
+        <ion-button (click)="loadProducts()">
+          Reintentar
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+
+  }
+
+  @if (!loading && !error) {
+
+    <div class="products-header">
+      <div>
+        <p>{{ total }} productos disponibles</p>
+      </div>
+    </div>
+
+    <div class="table-container">
+
+      <table>
+
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Producto</th>
+            <th>Categoría</th>
+            <th>Marca</th>
+            <th>Precio</th>
+            <th>Valoración</th>
+            <th>Stock</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          @for (product of products; track product.id) {
+
+            <tr>
+
+              <td>{{ product.id }}</td>
+
+              <td class="product-cell">
+                <img
+                  [src]="product.thumbnail"
+                  [alt]="product.title">
+
+                <span>{{ product.title }}</span>
+              </td>
+
+              <td>{{ product.category }}</td>
+
+              <td>{{ product.brand }}</td>
+
+              <td class="price">
+                {{ product.price | currency:'EUR' }}
+              </td>
+
+              <td>
+                ⭐ {{ product.rating }}
+              </td>
+
+              <td>
+                {{ product.stock }}
+              </td>
+
+            </tr>
+
+          }
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  }
+
+</ion-content>
