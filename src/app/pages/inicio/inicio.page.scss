@@ -1,30 +1,115 @@
 .welcome-container {
-  max-width: 700px;
-  margin: 60px auto;
+  min-height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
 }
 
 .welcome-card {
+  width: 100%;
+  max-width: 850px;
   text-align: center;
-  padding: 40px 25px;
-  border-radius: 16px;
-  background: var(--ion-card-background, #ffffff);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
 }
 
-.welcome-card h1 {
-  font-size: 30px;
-  margin-bottom: 15px;
+.welcome-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+  background: var(--ion-color-primary);
+  color: white;
+  font-size: 42px;
+}
+
+h1 {
+  margin: 10px 0;
+  font-size: 2.2rem;
   font-weight: 700;
 }
 
-.welcome-card p {
-  font-size: 17px;
+.subtitle {
+  max-width: 600px;
+  margin: 0 auto 35px;
+  font-size: 1.05rem;
   line-height: 1.6;
-  margin-bottom: 30px;
   color: var(--ion-color-medium);
 }
 
-.welcome-card ion-button {
-  max-width: 300px;
-  margin: 0 auto;
+.options-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.option-card {
+  margin: 0;
+  height: 100%;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.option-card:hover {
+  transform: translateY(-5px);
+}
+
+.option-card ion-card-header {
+  text-align: center;
+}
+
+.option-card ion-card-content {
+  text-align: center;
+  color: var(--ion-color-medium);
+  line-height: 1.5;
+}
+
+.option-icon {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 15px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+  font-size: 30px;
+}
+
+.product-icon {
+  background: rgba(var(--ion-color-primary-rgb), 0.15);
+  color: var(--ion-color-primary);
+}
+
+.user-icon {
+  background: rgba(var(--ion-color-tertiary-rgb), 0.15);
+  color: var(--ion-color-tertiary);
+}
+
+.footer-text {
+  margin-top: 35px;
+  font-size: 0.85rem;
+  color: var(--ion-color-medium);
+}
+
+/* Móvil */
+@media (max-width: 600px) {
+  .welcome-container {
+    padding: 10px;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  .options-container {
+    grid-template-columns: 1fr;
+  }
 }

@@ -1,32 +1,42 @@
 import { Component } from '@angular/core';
-
-import {
-  IonContent,
-  IonHeader,
-  IonTitle,
-  IonToolbar,
-  IonButton,
-  IonButtons,
-  IonIcon
-} from '@ionic/angular';
-
 import { RouterLink } from '@angular/router';
 
-import { moonOutline, sunnyOutline } from 'ionicons/icons';
+import {
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonButtons,
+  IonButton,
+  IonIcon,
+  IonContent,
+  IonCard,
+  IonCardHeader,
+  IonCardTitle,
+  IonCardContent
+} from '@ionic/angular';
+
+import {
+  moonOutline,
+  sunnyOutline
+} from 'ionicons/icons';
 
 @Component({
   selector: 'app-inicio',
   templateUrl: './inicio.page.html',
   styleUrls: ['./inicio.page.scss'],
   imports: [
+    RouterLink,
     IonHeader,
     IonToolbar,
     IonTitle,
-    IonContent,
-    IonButton,
     IonButtons,
+    IonButton,
     IonIcon,
-    RouterLink
+    IonContent,
+    IonCard,
+    IonCardHeader,
+    IonCardTitle,
+    IonCardContent
   ]
 })
 export class InicioPage {
@@ -36,9 +46,13 @@ export class InicioPage {
   moonOutline = moonOutline;
   sunnyOutline = sunnyOutline;
 
-  toggleDarkMode(): void {
+  toggleDarkMode() {
     this.darkMode = !this.darkMode;
 
-    document.body.classList.toggle('dark', this.darkMode);
+    document.body.classList.toggle(
+      'dark',
+      this.darkMode
+    );
   }
+
 }

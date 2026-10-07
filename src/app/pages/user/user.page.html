@@ -1,0 +1,153 @@
+<ion-header>
+  <ion-toolbar color="tertiary">
+
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/inicio"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>Usuarios</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="ion-padding">
+
+  <!-- Cargando usuarios -->
+  @if (loading) {
+
+    <div
+      class="loading-container"
+      style="text-align: center; padding: 2rem;"
+    >
+
+      <ion-spinner name="crescent"></ion-spinner>
+
+      <p>Conectando con DummyJSON...</p>
+
+    </div>
+
+  }
+
+  <!-- Error -->
+  @if (error) {
+
+    <ion-card color="danger">
+
+      <ion-card-header>
+
+        <ion-card-title>
+          Fallo de Red
+        </ion-card-title>
+
+      </ion-card-header>
+
+      <ion-card-content>
+
+        {{ error }}
+
+      </ion-card-content>
+
+    </ion-card>
+
+  }
+
+
+  <!-- Usuarios cargados -->
+  @if (!loading && !error) {
+
+    <div
+      class="grid-container"
+      style="
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 1rem;
+      "
+    >
+
+      @for (user of users; track user.id) {
+
+        <ion-card>
+
+          <!-- Imagen -->
+          <img
+            [src]="user.image"
+            [alt]="user.firstName + ' ' + user.lastName"
+            style="
+              height: 200px;
+              object-fit: contain;
+              width: 100%;
+              padding: 10px;
+            "
+          />
+
+
+          <!-- Nombre -->
+          <ion-card-header>
+
+            <ion-card-title style="font-size: 1.1rem;">
+
+              {{ user.firstName }} {{ user.lastName }}
+
+            </ion-card-title>
+
+          </ion-card-header>
+
+
+          <!-- Información -->
+          <ion-card-content>
+
+            <p>
+              <strong>Usuario:</strong>
+              {{ user.username }}
+            </p>
+
+            <p>
+              <strong>Edad:</strong>
+              {{ user.age }} años
+            </p>
+
+            <p>
+              <strong>Email:</strong>
+              {{ user.email }}
+            </p>
+
+            <p>
+              <strong>Teléfono:</strong>
+              {{ user.phone }}
+            </p>
+
+            <p>
+              <strong>Empresa:</strong>
+              {{ user.company.name }}
+            </p>
+
+            <p>
+              <strong>Puesto:</strong>
+              {{ user.company.title }}
+            </p>
+
+          </ion-card-content>
+
+        </ion-card>
+
+      }
+
+    </div>
+
+  }
+
+
+  <!-- Botón para volver a Inicio -->
+  <div style="text-align: center; margin-top: 2rem;">
+
+    <ion-button
+      routerLink="/inicio"
+      color="tertiary"
+    >
+      Volver a Inicio
+    </ion-button>
+
+  </div>
+
+</ion-content>

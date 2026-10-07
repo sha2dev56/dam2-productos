@@ -1,6 +1,7 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Inicio</ion-title>
+  <ion-toolbar color="primary">
+
+    <ion-title>API REST</ion-title>
 
     <ion-buttons slot="end">
       <ion-button (click)="toggleDarkMode()">
@@ -10,8 +11,10 @@
         </ion-icon>
       </ion-button>
     </ion-buttons>
+
   </ion-toolbar>
 </ion-header>
+
 
 <ion-content class="ion-padding">
 
@@ -19,18 +22,77 @@
 
     <div class="welcome-card">
 
-      <h1>API REST</h1>
+      <div class="welcome-icon">
+        <ion-icon name="cloud-outline"></ion-icon>
+      </div>
 
-      <p>
+      <h1>Bienvenido</h1>
+
+      <p class="subtitle">
         Aplicación desarrollada con Ionic y Angular Standalone
-        para consumir una API REST.
+        para consumir diferentes APIs REST.
       </p>
 
-      <ion-button
-        routerLink="/productos"
-        expand="block">
-        Ver productos
-      </ion-button>
+
+      <div class="options-container">
+
+        <!-- Productos -->
+        <ion-card
+          class="option-card"
+          button="true"
+          routerLink="/productos">
+
+          <ion-card-header>
+
+            <div class="option-icon product-icon">
+              <ion-icon name="cart-outline"></ion-icon>
+            </div>
+
+            <ion-card-title>
+              Productos
+            </ion-card-title>
+
+          </ion-card-header>
+
+          <ion-card-content>
+            Consulta la lista de productos obtenida
+            desde la API REST.
+          </ion-card-content>
+
+        </ion-card>
+
+
+        <!-- Usuarios -->
+        <ion-card
+          class="option-card"
+          button="true"
+          routerLink="/user">
+
+          <ion-card-header>
+
+            <div class="option-icon user-icon">
+              <ion-icon name="people-outline"></ion-icon>
+            </div>
+
+            <ion-card-title>
+              Usuarios
+            </ion-card-title>
+
+          </ion-card-header>
+
+          <ion-card-content>
+            Consulta información de usuarios
+            obtenida desde DummyJSON.
+          </ion-card-content>
+
+        </ion-card>
+
+      </div>
+
+
+      <p class="footer-text">
+        Ionic + Angular · Consumo de APIs REST
+      </p>
 
     </div>
 

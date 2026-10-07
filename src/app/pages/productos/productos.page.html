@@ -33,17 +33,21 @@
   @if (error) {
 
     <ion-card class="error-card">
+
       <ion-card-header>
         <ion-card-title>Error</ion-card-title>
       </ion-card-header>
 
       <ion-card-content>
+
         <p>{{ error }}</p>
 
         <ion-button (click)="loadProducts()">
           Reintentar
         </ion-button>
+
       </ion-card-content>
+
     </ion-card>
 
   }
@@ -51,66 +55,67 @@
   @if (!loading && !error) {
 
     <div class="products-header">
-      <div>
-        <p>{{ total }} productos disponibles</p>
-      </div>
+      <p>{{ total }} productos disponibles</p>
     </div>
 
-    <div class="table-container">
+    <div class="products-grid">
 
-      <table>
+      @for (product of products; track product.id) {
 
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Producto</th>
-            <th>Categoría</th>
-            <th>Marca</th>
-            <th>Precio</th>
-            <th>Valoración</th>
-            <th>Stock</th>
-          </tr>
-        </thead>
+        <ion-card class="product-card">
 
-        <tbody>
+          <div class="product-image">
+            <img
+              [src]="product.thumbnail"
+              [alt]="product.title">
+          </div>
 
-          @for (product of products; track product.id) {
+          <ion-card-header>
 
-            <tr>
+            <ion-card-title>
+              {{ product.title }}
+            </ion-card-title>
 
-              <td>{{ product.id }}</td>
+            <p class="category">
+              {{ product.category }}
+              @if (product.brand) {
+                · {{ product.brand }}
+              }
+            </p>
 
-              <td class="product-cell">
-                <img
-                  [src]="product.thumbnail"
-                  [alt]="product.title">
+          </ion-card-header>
 
-                <span>{{ product.title }}</span>
-              </td>
+          <ion-card-content>
 
-              <td>{{ product.category }}</td>
+            <div class="product-info">
 
-              <td>{{ product.brand }}</td>
+              <div>
+                <span class="label">Precio</span>
 
-              <td class="price">
-                {{ product.price | currency:'EUR' }}
-              </td>
+                <strong class="price">
+                  {{ product.price | currency:'EUR' }}
+                </strong>
+              </div>
 
-              <td>
-                ⭐ {{ product.rating }}
-              </td>
+              <div>
+                <span class="label">Valoración</span>
 
-              <td>
-                {{ product.stock }}
-              </td>
+                <strong>
+                  ⭐ {{ product.rating }}
+                </strong>
+              </div>
 
-            </tr>
+            </div>
 
-          }
+            <div class="stock">
+              Stock: {{ product.stock }}
+            </div>
 
-        </tbody>
+          </ion-card-content>
 
-      </table>
+        </ion-card>
+
+      }
 
     </div>
 
