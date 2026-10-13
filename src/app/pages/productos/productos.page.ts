@@ -1,6 +1,5 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal, computed } from '@angular/core';
 import { CommonModule, CurrencyPipe } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 
 import {
   IonHeader,
@@ -28,6 +27,7 @@ import { moonOutline, sunnyOutline, chevronBackOutline, chevronForwardOutline } 
   selector: 'app-productos',
   templateUrl: './productos.page.html',
   styleUrls: ['./productos.page.scss'],
+  standalone: true,
   imports: [
     CommonModule,
     RouterLink,
@@ -51,14 +51,19 @@ export class ProductosPage implements OnInit {
 
   private productService = inject(ProductService);
 
-  products: Product[] = [];
-  total = 0;
-  loading = false;
-  error = '';
+  // Estados reactivos con Signals
+  products = signal<Product[]>([]);
+  total = signal<number>(0);
+  loading = signal<boolean>(false);
+  error = signal<string>('');
 
-  // Parámetros de Paginación
+  // Paginación
   limit = 10;
-  skip = 0;
+  skip = signal<number>(0);
+
+  // Señales derivadas (Computed Signals)
+  currentPage = computed(() => Math.floor(this.skip() / this.limit) + 1);
+  totalPages = computed(() => Math.ceil(this.total() / this.limit));
 
   darkMode = false;
 
@@ -77,46 +82,38 @@ export class ProductosPage implements OnInit {
   }
 
   loadProducts(): void {
-    this.loading = true;
-    this.error = '';
+    this.loading.set(true);
+    this.error.set('');
 
-    this.productService.getProducts(this.limit, this.skip)
+    this.productService.getProducts(this.limit, this.skip())
       .pipe(
         finalize(() => {
-          this.loading = false;
+          this.loading.set(false);
         })
       )
       .subscribe({
         next: (response: ProductsResponse) => {
-          this.products = response.products;
-          this.total = response.total;
+          this.products.set(response.products);
+          this.total.set(response.total);
         },
-        error: (error) => {
-          console.error(error);
-          this.error = 'No se han podido cargar los productos.';
+        error: (err) => {
+          console.error(err);
+          this.error.set('No se han podido cargar los productos.');
         }
       });
   }
 
   nextPage(): void {
-    if (this.skip + this.limit < this.total) {
-      this.skip += this.limit;
+    if (this.skip() + this.limit < this.total()) {
+      this.skip.update(val => val + this.limit);
       this.loadProducts();
     }
   }
 
   prevPage(): void {
-    if (this.skip - this.limit >= 0) {
-      this.skip -= this.limit;
+    if (this.skip() - this.limit >= 0) {
+      this.skip.update(val => val - this.limit);
       this.loadProducts();
     }
-  }
-
-  get currentPage(): number {
-    return Math.floor(this.skip / this.limit) + 1;
-  }
-
-  get totalPages(): number {
-    return Math.ceil(this.total / this.limit);
   }
 }

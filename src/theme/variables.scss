@@ -1,2 +1,67 @@
 // For information on how to create your own theme, please refer to:
 // https://ionicframework.com/docs/theming/
+// Ionic Variables and Theming Options. https://ionicframework.com/docs/theming/coloring
+
+:root {
+  // Color primario: Rosa profesional / empolvado (Dusty Rose)
+  --ion-color-primary: #b87d8e;
+  --ion-color-primary-rgb: 184, 125, 142;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #a26d7d;
+  --ion-color-primary-tint: #bf8b9a;
+
+  // Color secundario: Tono neutro cálido o acento secundario sutil
+  --ion-color-secondary: #8c7b80;
+  --ion-color-secondary-rgb: 140, 123, 128;
+  --ion-color-secondary-contrast: #ffffff;
+  --ion-color-secondary-contrast-rgb: 255, 255, 255;
+  --ion-color-secondary-shade: #7b6c71;
+  --ion-color-secondary-tint: #98888c;
+
+  // Fondos y superficies neutros
+  --ion-background-color: #f7f6f5; // Gris/marfil muy suave y elegante
+  --ion-background-color-rgb: 247, 246, 245;
+  
+  --ion-item-background: #ffffff;
+  --ion-card-background: #ffffff;
+
+  // Textos profesionales (evitamos negro puro)
+  --ion-text-color: #2c2a2b;
+  --ion-text-color-rgb: 44, 42, 43;
+  
+  --ion-color-step-50: #efeeed;
+  --ion-color-step-100: #e5e4e2;
+  --ion-color-step-150: #dad8d6;
+  --ion-color-step-200: #cecbc9;
+  --ion-color-step-600: #6e6b6d;
+  --ion-color-step-800: #424041;
+
+  --ion-color-medium: #8c898b;
+  --ion-color-light: #f0eeed;
+}
+
+// MODO OSCURO (Neutros oscuros con acentos rosas apagados)
+body.dark {
+  --ion-color-primary: #c993a2;
+  --ion-color-primary-rgb: 201, 147, 162;
+  --ion-color-primary-contrast: #1a1819;
+  --ion-color-primary-contrast-rgb: 26, 24, 25;
+  --ion-color-primary-shade: #b1818f;
+  --ion-color-primary-tint: #cf9fab;
+
+  --ion-background-color: #161516; // Gris muy oscuro y profundo
+  --ion-background-color-rgb: 22, 21, 22;
+
+  --ion-item-background: #1e1c1d;
+  --ion-card-background: #1e1c1d;
+
+  --ion-text-color: #f1efef;
+  --ion-text-color-rgb: 241, 239, 239;
+
+  --ion-color-step-50: #222021;
+  --ion-color-step-150: #333032;
+  --ion-color-step-600: #a09d9f;
+  --ion-color-medium: #9e9a9d;
+  --ion-color-light: #2c292b;
+}

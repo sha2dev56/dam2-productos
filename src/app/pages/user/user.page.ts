@@ -1,31 +1,32 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
-import { finalize, timeout } from 'rxjs';
-
 import {
-  IonContent,
   IonHeader,
-  IonTitle,
   IonToolbar,
+  IonTitle,
+  IonContent,
   IonButtons,
   IonBackButton,
   IonSpinner,
   IonCard,
   IonCardHeader,
   IonCardTitle,
-  IonCardContent
+  IonCardContent,
+  IonButton,
+  IonIcon
 } from '@ionic/angular';
-
-import { User } from '../../models/user';
-import { UserService } from '../../services/user';
+import { RouterLink } from '@angular/router';
+import { finalize } from 'rxjs';
+import { UserService } from '../../services/user'; // Ajusta según la ruta de tu servicio
+import { User } from '../../models/user'; // Ajusta según la ruta de tu modelo
 
 @Component({
-  selector: 'app-user',
+  selector: 'app-usuarios',
   templateUrl: './user.page.html',
   styleUrls: ['./user.page.scss'],
+  standalone: true,
   imports: [
+    CommonModule,
     RouterLink,
     IonContent,
     IonHeader,
@@ -38,55 +39,40 @@ import { UserService } from '../../services/user';
     IonCardHeader,
     IonCardTitle,
     IonCardContent,
-    CommonModule,
-    FormsModule
+    IonButton,
+    IonIcon
   ]
 })
 export class UserPage implements OnInit {
-
   private userService = inject(UserService);
 
-  users: User[] = [];
+  // Declaración del estado usando Signals
+  users = signal<User[]>([]);
+  loading = signal<boolean>(false);
+  error = signal<string>('');
 
-  loading = true;
-
-  error = '';
-
-  ngOnInit() {
-    console.log('UserPage iniciada');
-    this.fetchUsers();
+  ngOnInit(): void {
+    this.loadUsers();
   }
 
-  fetchUsers() {
-
-    console.log('Haciendo petición a UserService...');
-
-    this.loading = true;
-    this.error = '';
+  loadUsers(): void {
+    this.loading.set(true);
+    this.error.set('');
 
     this.userService.getUsers()
       .pipe(
-        timeout(10000),
         finalize(() => {
-          console.log('FINALIZE ejecutado');
-          this.loading = false;
+          this.loading.set(false);
         })
       )
       .subscribe({
-
-        next: (data) => {
-          console.log('DATOS RECIBIDOS:', data);
-
-          this.users = data.users;
+        next: (response: { users: User[] }) => {
+          this.users.set(response.users);
         },
-
         error: (err) => {
-          console.error('ERROR:', err);
-
-          this.error = 'No se pudo conectar con DummyJSON';
+          console.error(err);
+          this.error.set('No se han podido cargar los usuarios.');
         }
-
       });
-
   }
 }

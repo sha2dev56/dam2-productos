@@ -1,0 +1,210 @@
+.users-toolbar {
+  --background: transparent;
+  --border-color: transparent;
+  
+  ion-title {
+    font-weight: 600;
+    font-size: 18px;
+    letter-spacing: -0.3px;
+  }
+}
+
+.users-content {
+  --background: #f4f6f8; // Fondo gris-azulado muy suave y profesional
+}
+
+.users-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+  padding-bottom: 30px;
+}
+
+// Tarjeta de Perfil Moderna
+.user-card-modern {
+  background: var(--ion-card-background, #ffffff);
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(53, 99, 143, 0.12);
+    border-color: rgba(53, 99, 143, 0.2);
+  }
+}
+
+.user-avatar-container {
+  height: 180px;
+  background: #eef2f6; // Fondo sutil para destacar la foto
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    background: #fff;
+    transition: transform 0.3s ease;
+  }
+
+  &:hover img {
+    transform: scale(1.05);
+  }
+
+  .user-age-pill {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #35638f;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+}
+
+.user-info-section {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
+  .user-name {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--ion-text-color);
+    margin: 0 0 2px;
+    letter-spacing: -0.2px;
+  }
+
+  .user-username {
+    font-size: 13px;
+    color: #35638f; // Azul pizarra corporativo
+    font-weight: 500;
+    margin-bottom: 12px;
+    display: block;
+  }
+}
+
+.company-badge {
+  background: var(--ion-color-step-50, #f0f4f8);
+  padding: 10px 12px;
+  border-radius: 10px;
+  margin-bottom: 16px;
+  border-left: 3px solid #35638f;
+
+  .company-title {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ion-text-color);
+  }
+
+  .company-name {
+    font-size: 12px;
+    color: var(--ion-color-medium);
+  }
+}
+
+.contact-details {
+  border-top: 1px solid rgba(0, 0, 0, 0.04);
+  padding-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: auto;
+
+  .contact-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+
+    .label {
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--ion-color-medium);
+      font-weight: 600;
+    }
+
+    .value {
+      color: var(--ion-text-color);
+      font-weight: 500;
+      max-width: 60%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+}
+
+.loading-container {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--ion-color-medium);
+
+  ion-spinner {
+    margin-bottom: 12px;
+    --color: #35638f;
+  }
+}
+
+.error-card {
+  margin-top: 30px;
+  border-radius: 14px;
+}
+
+/* MODO OSCURO (Tonos azules oscuros y elegantes) */
+:host-context(body.dark) {
+  .users-content {
+    --background: #101418;
+  }
+
+  .user-card-modern {
+    background: #181d24;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+
+    &:hover {
+      box-shadow: 0 16px 40px rgba(92, 142, 191, 0.15);
+      border-color: rgba(92, 142, 191, 0.3);
+    }
+  }
+
+  .user-avatar-container {
+    background: #13171d;
+
+    .user-age-pill {
+      background: rgba(24, 29, 36, 0.85);
+      color: #79aee0;
+    }
+  }
+
+  .user-info-section {
+    .user-username {
+      color: #79aee0;
+    }
+  }
+
+  .company-badge {
+    background: #1e2530;
+    border-left-color: #79aee0;
+  }
+
+  .contact-details {
+    border-top-color: rgba(255, 255, 255, 0.05);
+  }
+}

@@ -1,153 +1,79 @@
-<ion-header>
-  <ion-toolbar color="tertiary">
-
+<ion-header class="ion-no-border">
+  <ion-toolbar class="users-toolbar">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/inicio"></ion-back-button>
+      <ion-back-button defaultHref="/inicio" text=""></ion-back-button>
     </ion-buttons>
-
-    <ion-title>Usuarios</ion-title>
-
+    <ion-title>Directorio de Usuarios</ion-title>
   </ion-toolbar>
 </ion-header>
 
-
-<ion-content class="ion-padding">
+<ion-content class="ion-padding users-content">
 
   <!-- Cargando usuarios -->
-  @if (loading) {
-
-    <div
-      class="loading-container"
-      style="text-align: center; padding: 2rem;"
-    >
-
+  @if (loading()) {
+    <div class="loading-container">
       <ion-spinner name="crescent"></ion-spinner>
-
-      <p>Conectando con DummyJSON...</p>
-
+      <p>Cargando perfiles...</p>
     </div>
-
   }
   
   <!-- Error -->
-  @if (error) {
-
-    <ion-card color="danger">
-
+  @if (error()) {
+    <ion-card class="error-card">
       <ion-card-header>
-
-        <ion-card-title>
-          Fallo de Red
-        </ion-card-title>
-
+        <ion-card-title>Fallo de Conexión</ion-card-title>
       </ion-card-header>
-
       <ion-card-content>
-
-        {{ error }}
-
+        <p>{{ error() }}</p>
       </ion-card-content>
-
     </ion-card>
-
   }
 
-
   <!-- Usuarios cargados -->
-  @if (!loading && !error) {
+  @if (!loading() && !error()) {
 
-    <div
-      class="grid-container"
-      style="
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-        gap: 1rem;
-      "
-    >
+    <div class="users-grid">
+      @for (user of users(); track user.id) {
+        <div class="user-card-modern">
+          
+          <!-- Avatar / Imagen de perfil -->
+          <div class="user-avatar-container">
+            <img
+              [src]="user.image"
+              [alt]="user.firstName + ' ' + user.lastName"
+              loading="lazy"
+            />
+            <span class="user-age-pill">{{ user.age }} años</span>
+          </div>
 
-      @for (user of users; track user.id) {
+          <!-- Información Principal -->
+          <div class="user-info-section">
+            <h3 class="user-name">{{ user.firstName }} {{ user.lastName }}</h3>
+            <span class="user-username">&#64;{{ user.username }}</span>
 
-        <ion-card>
+            <!-- Puesto y Empresa -->
+            <div class="company-badge">
+              <span class="company-title">{{ user.company.title }}</span>
+              <span class="company-name">en {{ user.company.name }}</span>
+            </div>
 
-          <!-- Imagen -->
-          <img
-            [src]="user.image"
-            [alt]="user.firstName + ' ' + user.lastName"
-            style="
-              height: 200px;
-              object-fit: contain;
-              width: 100%;
-              padding: 10px;
-            "
-          />
+            <!-- Datos de Contacto -->
+            <div class="contact-details">
+              <div class="contact-item">
+                <span class="label">Email</span>
+                <span class="value">{{ user.email }}</span>
+              </div>
+              <div class="contact-item">
+                <span class="label">Teléfono</span>
+                <span class="value">{{ user.phone }}</span>
+              </div>
+            </div>
+          </div>
 
-
-          <!-- Nombre -->
-          <ion-card-header>
-
-            <ion-card-title style="font-size: 1.1rem;">
-
-              {{ user.firstName }} {{ user.lastName }}
-
-            </ion-card-title>
-
-          </ion-card-header>
-
-
-          <!-- Información -->
-          <ion-card-content>
-
-            <p>
-              <strong>Usuario:</strong>
-              {{ user.username }}
-            </p>
-
-            <p>
-              <strong>Edad:</strong>
-              {{ user.age }} años
-            </p>
-
-            <p>
-              <strong>Email:</strong>
-              {{ user.email }}
-            </p>
-
-            <p>
-              <strong>Teléfono:</strong>
-              {{ user.phone }}
-            </p>
-
-            <p>
-              <strong>Empresa:</strong>
-              {{ user.company.name }}
-            </p>
-
-            <p>
-              <strong>Puesto:</strong>
-              {{ user.company.title }}
-            </p>
-
-          </ion-card-content>
-
-        </ion-card>
-
+        </div>
       }
-
     </div>
 
   }
-
-
-  <!-- Botón para volver a Inicio -->
-  <div style="text-align: center; margin-top: 2rem;">
-
-    <ion-button
-      routerLink="/inicio"
-      color="tertiary"
-    >
-      Volver a Inicio
-    </ion-button>
-
-  </div>
 
 </ion-content>
