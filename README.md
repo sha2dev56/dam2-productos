@@ -22,8 +22,3 @@ Aplicación móvil y web multiplataforma desarrollada con **Ionic** y **Angular*
 - **Estilos:** SASS / SCSS
 - **Control de Versiones:** Git & GitHub
 - **API Externa:** [DummyJSON](https://dummyjson.com/) (Productos y Usuarios)
-
-
-1. **Instalar las dependencias:**
-   ```bash
-   npm install
