@@ -22,13 +22,14 @@ import { Product as ProductService } from '../../services/product';
 import { Product, ProductsResponse } from '../../models/product.model';
 import { RouterLink } from '@angular/router';
 import { finalize } from 'rxjs';
-import { moonOutline, sunnyOutline } from 'ionicons/icons';
+import { moonOutline, sunnyOutline, chevronBackOutline, chevronForwardOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'app-productos',
   templateUrl: './productos.page.html',
   styleUrls: ['./productos.page.scss'],
   imports: [
+    CommonModule,
     RouterLink,
     CurrencyPipe,
     IonContent,
@@ -55,10 +56,16 @@ export class ProductosPage implements OnInit {
   loading = false;
   error = '';
 
+  // Parámetros de Paginación
+  limit = 10;
+  skip = 0;
+
   darkMode = false;
 
   moonOutline = moonOutline;
   sunnyOutline = sunnyOutline;
+  chevronBackOutline = chevronBackOutline;
+  chevronForwardOutline = chevronForwardOutline;
 
   ngOnInit(): void {
     this.loadProducts();
@@ -73,7 +80,7 @@ export class ProductosPage implements OnInit {
     this.loading = true;
     this.error = '';
 
-    this.productService.getProducts()
+    this.productService.getProducts(this.limit, this.skip)
       .pipe(
         finalize(() => {
           this.loading = false;
@@ -89,5 +96,27 @@ export class ProductosPage implements OnInit {
           this.error = 'No se han podido cargar los productos.';
         }
       });
+  }
+
+  nextPage(): void {
+    if (this.skip + this.limit < this.total) {
+      this.skip += this.limit;
+      this.loadProducts();
+    }
+  }
+
+  prevPage(): void {
+    if (this.skip - this.limit >= 0) {
+      this.skip -= this.limit;
+      this.loadProducts();
+    }
+  }
+
+  get currentPage(): number {
+    return Math.floor(this.skip / this.limit) + 1;
+  }
+
+  get totalPages(): number {
+    return Math.ceil(this.total / this.limit);
   }
 }

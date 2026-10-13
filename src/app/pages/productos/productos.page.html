@@ -22,34 +22,24 @@
 <ion-content class="ion-padding">
 
   @if (loading) {
-
     <div class="loading-container">
       <ion-spinner></ion-spinner>
       <p>Cargando productos...</p>
     </div>
-
   }
 
   @if (error) {
-
     <ion-card class="error-card">
-
       <ion-card-header>
         <ion-card-title>Error</ion-card-title>
       </ion-card-header>
-
       <ion-card-content>
-
         <p>{{ error }}</p>
-
         <ion-button (click)="loadProducts()">
           Reintentar
         </ion-button>
-
       </ion-card-content>
-
     </ion-card>
-
   }
 
   @if (!loading && !error) {
@@ -59,11 +49,8 @@
     </div>
 
     <div class="products-grid">
-
       @for (product of products; track product.id) {
-
         <ion-card class="product-card">
-
           <div class="product-image">
             <img
               [src]="product.thumbnail"
@@ -71,7 +58,6 @@
           </div>
 
           <ion-card-header>
-
             <ion-card-title>
               {{ product.title }}
             </ion-card-title>
@@ -82,16 +68,12 @@
                 · {{ product.brand }}
               }
             </p>
-
           </ion-card-header>
 
           <ion-card-content>
-
             <div class="product-info">
-
               <div>
                 <span class="label">Precio</span>
-
                 <strong class="price">
                   {{ product.price | currency:'EUR' }}
                 </strong>
@@ -99,24 +81,41 @@
 
               <div>
                 <span class="label">Valoración</span>
-
                 <strong>
                   ⭐ {{ product.rating }}
                 </strong>
               </div>
-
             </div>
 
             <div class="stock">
               Stock: {{ product.stock }}
             </div>
-
           </ion-card-content>
-
         </ion-card>
-
       }
+    </div>
 
+    <!-- Controles de Paginación -->
+    <div class="pagination-controls">
+      <ion-button 
+        [disabled]="skip === 0" 
+        (click)="prevPage()"
+        fill="outline">
+        <ion-icon slot="start" [icon]="chevronBackOutline"></ion-icon>
+        Anterior
+      </ion-button>
+
+      <span class="page-info">
+        Página {{ currentPage }} de {{ totalPages }}
+      </span>
+
+      <ion-button 
+        [disabled]="skip + limit >= total" 
+        (click)="nextPage()"
+        fill="outline">
+        Siguiente
+        <ion-icon slot="end" [icon]="chevronForwardOutline"></ion-icon>
+      </ion-button>
     </div>
 
   }
